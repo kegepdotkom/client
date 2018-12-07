@@ -1,7 +1,8 @@
 const app = new Vue ({
     el: '#app',
     data: {
-        isLogin: 'false',
+        isLogin: false,
+        registerForm: false,
         contentShow: {
             image: [],
             video: []
@@ -9,7 +10,7 @@ const app = new Vue ({
         loginUser: {
             username: '',
             imgUrl: ''
-        }
+        },
     },
     methods: {
         setContent () {
@@ -38,6 +39,14 @@ const app = new Vue ({
             this.loginUser.imgUrl = ''
             this.isLogin = false
 
+        },
+        showFormRegister () {
+            this.registerForm = true
+            this.isLogin=true
+        },
+        hideFormRegister(){
+            this.registerForm = false
+            this.isLogin=false
         }
     },
     created () {

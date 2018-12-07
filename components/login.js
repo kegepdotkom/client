@@ -15,7 +15,11 @@ Vue.component('login-component', {
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" v-model="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-light">Submit</button>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-light">Submit</button>
+            </div>            
+        </div>
     </form>
     `,
     methods: {
