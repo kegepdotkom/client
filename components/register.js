@@ -8,7 +8,7 @@ Vue.component('register-user', {
       }
     },
     template:`
-        <form v-on:submit.prevent="register()" id="register">
+        <form @submit.prevent="register" id="register">
             <div class="form-group">
                 <label for="exampleInputUser">User Name</label>
                 <input v-model="regusername" type="text" class="form-control" id="exampleInputUser"  placeholder="Enter email">
@@ -28,7 +28,7 @@ Vue.component('register-user', {
         `,
     methods:{
       register(){
-        console.log('masuk sini=================')
+        let self = this
         axios({
           method  :"POST",
           url     :'http://localhost:3000/users',
@@ -39,10 +39,10 @@ Vue.component('register-user', {
           }
         })
         .then(function({data}){
-            this.regusername ='',
-            this.regemail    ='',
-            this.regpassword =''
-            console.log(data)
+            self.regusername ='',
+            self.regemail    ='',
+            self.regpassword ='',
+            alert('sukses register masbro')
         })
         .catch(function(err){
             console.log(err)

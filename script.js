@@ -11,6 +11,7 @@ const app = new Vue ({
             username: '',
             imgUrl: ''
         },
+        selected: 'image'
     },
     methods: {
         setContent () {
@@ -19,7 +20,13 @@ const app = new Vue ({
                 url: 'http://localhost:3000/media/'
             })
             .then(({data}) => {
-                this.contentShow = data.media
+                data.media.forEach(e => {
+                    if(e.type === 'image/jpeg') {
+                        this.contentShow.image.push(e)
+                    } else {
+                        this.contentShow.video.push(e)
+                    }
+                });
             })
             .catch(err => {
                 console.log(err)
@@ -47,6 +54,9 @@ const app = new Vue ({
         hideFormRegister(){
             this.registerForm = false
             this.isLogin=false
+        },
+        refreshContent () {
+            this.setContent()
         }
     },
     created () {
