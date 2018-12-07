@@ -1,9 +1,14 @@
 const app = new Vue ({
     el: '#app',
     data: {
+        isLogin: 'false',
         contentShow: {
             image: [],
             video: []
+        },
+        loginUser: {
+            username: '',
+            imgUrl: ''
         }
     },
     methods: {
@@ -19,6 +24,12 @@ const app = new Vue ({
                 console.log(err)
                 alert('error mba')
             })
+        },
+        loginMethod (data) {
+            this.isLogin = 'true'
+            this.loginUser.username = data.username
+            this.loginUser.imgUrl = data.imgUrl
+            localStorage.setItem('token', data.token)
         }
     },
     created () {
