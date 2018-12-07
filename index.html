@@ -6,10 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
     <title>kegepdotkom</title>
 </head>
 <body>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+      
     <div id="app">
+
         <logo></logo>
         <div class="container mt-5 ">
             <div class="row">
@@ -23,19 +39,23 @@
                         <button @click.prevent="hideFormRegister" class="btn btn-light">Login</button>
                     </div>
                     <profile-card v-else-if="isLogin" :profile="loginUser" @logout="logout"></profile-card>
+                    <login-component @logged-in="loginMethod" v-if="!isLogin"></login-component>
+                    <profile-card :profile="loginUser" @logout="logout" @set-content="refreshContent" v-else-if="isLogin"></profile-card>
+                    <b-form-group label="Mau gambar apa video?" class="text-center m-5">
+                        <b-form-radio-group id="radios2" v-model="selected" name="radioSubComponent">
+                            <b-form-radio value="gambar">gambar</b-form-radio>
+                            <b-form-radio value="video">video</b-form-radio>
+                        </b-form-radio-group>
+                    </b-form-group>
                 </div>
                 <div class="col-sm-8 bg-light  text-center" style="
                     display: flex;
                     justify-content: center;">
-                    <show-content :media="contentShow"></show-content>
+                    <video-content v-if="selected === 'video'" :video="contentShow.video"></video-content>
+                    <show-content v-else :media="contentShow.image"></show-content>
                 </div>
             </div>
-        </div>
-    
-        
-        
-        
-        
+        </div>    
         
     </div>
     
@@ -49,5 +69,6 @@
     <script src="./components/logo.js"></script>
     <script src="./components/show-profile.js"></script>
     <script src="./components/register.js"></script>
+    <script src="./components/video-content.js"></script>
 </body>
 </html>
