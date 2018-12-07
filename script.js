@@ -1,7 +1,10 @@
 const app = new Vue ({
     el: '#app',
     data: {
-        contentShow: []
+        contentShow: {
+            image: [],
+            video: []
+        }
     },
     methods: {
         setContent () {
@@ -10,7 +13,7 @@ const app = new Vue ({
                 url: 'http://localhost:3000/media/'
             })
             .then(({data}) => {
-                this.contentShow.push(data)
+                this.contentShow = data.media
             })
             .catch(err => {
                 console.log(err)
