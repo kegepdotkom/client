@@ -24,22 +24,21 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
       
-    <div id="app">
-
-        <logo></logo>
-        <div class="container mt-5 ">
+      <div id="app">
+          
+          <logo></logo>
+          <div class="container mt-5 ">
             <div class="row">
                 <div class="col-sm border border-light">
                     <div v-if="!isLogin">
                         <login-component  @logged-in="loginMethod" ></login-component>  
-                        <button @click.prevent="showFormRegister" class="btn btn-light">Register</button>              
+                        <button @click.prevent="showFormRegister" class="btn btn-light mt-3">Register</button>              
                     </div>
                     <div v-if="registerForm">
                         <register-user ></register-user><hr>
                         <button @click.prevent="hideFormRegister" class="btn btn-light">Login</button>
                     </div>
                     <profile-card v-else-if="isLogin" :profile="loginUser" @logout="logout"></profile-card>
-                    <login-component @logged-in="loginMethod" v-if="!isLogin"></login-component>
                     <profile-card :profile="loginUser" @logout="logout" @set-content="refreshContent" v-else-if="isLogin"></profile-card>
                     <b-form-group label="Mau gambar apa video?" class="text-center m-5">
                         <b-form-radio-group id="radios2" v-model="selected" name="radioSubComponent">
