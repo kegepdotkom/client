@@ -28,7 +28,7 @@ Vue.component('login-component', {
                     password: this.password
                 }
             })
-            .then(data => {
+            .then(({data}) => {
                 this.$emit('logged-in', data);      
             })
             .catch(err => {

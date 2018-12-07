@@ -10,21 +10,14 @@
 </head>
 <body>
     <div id="app">
-
-        <div class="mx-auto" style="width: 200px;">
-            <b-navbar variant="faded" type="light">
-                <b-navbar-brand href="#" class="text-center">
-                <h2>KEGEPDOTKOM</h2>
-                </b-navbar-brand>
-            </b-navbar>
-        </div>
-        
+        <logo></logo>
         <div class="container mt-5 ">
             <div class="row">
                 <div class="col-sm border border-light">
-                    <login-component @logged-in="loginMethod"></login-component>
+                    <login-component @logged-in="loginMethod" v-if="!isLogin"></login-component>
+                    <profile-card :profile="loginUser" @logout="logout" v-else-if="isLogin"></profile-card>
                 </div>
-                <div class="col-sm-8 bg-light  text-center" style="    
+                <div class="col-sm-8 bg-light  text-center" style="
                     display: flex;
                     justify-content: center;">
                     <show-content :media="contentShow"></show-content>
@@ -46,5 +39,7 @@
     <script src="./script.js"></script>
     <script src="./components/show-content.js"></script>
     <script src="./components/login.js"></script>
+    <script src="./components/logo.js"></script>
+    <script src="./components/show-profile.js"></script>
 </body>
 </html>

@@ -26,13 +26,27 @@ const app = new Vue ({
             })
         },
         loginMethod (data) {
+            console.log(data)
             this.isLogin = 'true'
             this.loginUser.username = data.username
             this.loginUser.imgUrl = data.imgUrl
             localStorage.setItem('token', data.token)
+        },
+        logout () {
+            localStorage.clear()
+            this.loginUser.username = ''
+            this.loginUser.imgUrl = ''
+            this.isLogin = false
+
         }
     },
     created () {
         this.setContent()
+        let token = localStorage.getItem('token')
+        if(!token) {
+            this.isLogin = false
+        } else {
+            this.isLogin = true
+        }
     }
 })
